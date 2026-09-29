@@ -1,0 +1,13 @@
+$kind: http-request
+name: http://localhost:8000/api/bookings
+description: ""
+url: http://localhost:8000/api/bookings?page=1&limit=2
+method: GET
+queryParams:
+  page: "1"
+  limit: "2"
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 3865597534946042

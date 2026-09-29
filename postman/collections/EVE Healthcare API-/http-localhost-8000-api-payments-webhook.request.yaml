@@ -1,0 +1,19 @@
+$kind: http-request
+name: http://localhost:8000/api/payments/webhook
+description: ""
+url: http://localhost:8000/api/payments/webhook
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"bookingId\": \"166d76a1-9b82-4d63-a1b8-d6d2b1f0e03c\",\r
+
+    \    \"status\": \"SUCCESS\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 3744049916681896

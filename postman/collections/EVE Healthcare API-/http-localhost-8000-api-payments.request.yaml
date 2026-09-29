@@ -1,0 +1,19 @@
+$kind: http-request
+name: http://localhost:8000/api/payments
+description: ""
+url: http://localhost:8000/api/payments
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"bookingId\": \"1a85eef2-180b-4f07-a909-fc432a5c7407\",\r
+
+    \    \"amount\": 500\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 3547919649259106

@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// 1. Users Table
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  role      Role      @default(PATIENT)
+  
+  bookings  Booking[] 
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// 2. Diagnostic Centres Table
+model DiagnosticCentre {
+  id        String    @id @default(uuid())
+  name      String
+  location  String
+  
+  tests     Test[]    
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// 3. Tests Table
+model Test {
+  id          String   @id @default(uuid())
+  name        String   
+  description String?  
+  price       Float    
+  
+  centreId    String
+  centre      DiagnosticCentre @relation(fields: [centreId], references: [id])
+  
+  bookings    Booking[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 4. Bookings Table
+model Booking {
+  id        String        @id @default(uuid())
+  date      DateTime      
+  status    BookingStatus @default(PENDING) 
+  
+  userId    String
+  user      User          @relation(fields: [userId], references: [id])
+  
+  testId    String
+  test      Test          @relation(fields: [testId], references: [id])
+  
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  payment   Payment?
+}
+
+enum Role {
+  PATIENT
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  FAILED
+}
+
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+
+model Payment {
+  id            String        @id @default(uuid())
+  bookingId     String        @unique //1 payement for one booking 
+  booking       Booking       @relation(fields: [bookingId], references: [id])
+  
+  transactionId String?       @unique 
+  
+  amount        Float
+  status        PaymentStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}

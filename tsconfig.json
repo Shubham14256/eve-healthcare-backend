@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,                    //bridge between two languages 
+    "forceConsistentCasingInFileNames": true,  // prevent capital and small letter errors 
+    "strict": true,                            //prevent null exception
+    "skipLibCheck": true                       //skip testing node_modules 
+  },
+  "include": ["src/**/*"]                      //boundry of typescript only in src dont touch outer files
+}
