@@ -43,11 +43,11 @@ To ensure the codebase remains maintainable as it scales, I implemented a strict
 
 ### ✨ Bonus Engineering Implemented
 * **Dockerized Environment:** The entire app (Node Server + PostgreSQL) runs via a single `docker-compose up` command.
-* 
+  
 * **Pagination:** Added `skip` and `take` logic for the Admin booking retrieval endpoint (`/api/bookings?page=1&limit=10`) to prevent memory overload.
-* 
+  
 * **Rate Limiting:** Integrated `express-rate-limit` to protect endpoints from brute-force/DDoS attacks.
-* 
+  
 * **Structured Logging:** Integrated `morgan` for detailed HTTP request monitoring in the console.
 
 ##  How to Run the Project Locally (Using Docker)
